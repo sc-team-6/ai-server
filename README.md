@@ -25,6 +25,32 @@ sin_min = sin(2π * x / 60)
 ```
 ### App Embedding
 - app_emb_0 to app_emb_31: 32-dimensional average embedding over all package names in PackagesOpened, using a pre-trained embedding dictionary (e.g. app_emb.json)
+```
+{
+  "com.instagram.android": [0.12, -0.03, ..., 0.08],
+  "com.reddit.frontpage": [0.05, 0.14, ..., -0.01],
+  ...
+}
+```
+#### How to Use
+1. Load the JSON
+2. Get the corresponding embedding for a package
+3. If there are no matching embeddings, use zero vector
+4. If there are multiple apps, compute the average vector
+```
+fun getEmbedding(pkg: String, appEmb: Map<String, List<Float>>, dim: Int = 32): List<Float> {
+    return appEmb[pkg] ?: List(dim) { 0f }
+}
+
+fun averageEmbedding(packages: List<String>, appEmb: Map<String, List<Float>>, dim: Int = 32): List<Float> {
+    val vectors = packages.mapNotNull { appEmb[it] }
+    if (vectors.isEmpty()) return List(dim) { 0f }
+
+    return List(dim) { i ->
+        vectors.map { it[i] }.average().toFloat()
+    }
+}
+```
 ### Example Input
 ```
 {
