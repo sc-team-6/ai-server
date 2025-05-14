@@ -1,0 +1,36 @@
+Generate a structured medical report summary based on the following raw smartphone usage data, intended for a medical professional to review in the context of potential smartphone addiction assessment.
+
+The raw data consists of records with the following fields: ScreenSeconds (screen time in seconds), ScrollPx (scroll amount in pixels), Unlocks (number of unlocks), Timestamp (YYYY-MM-DD HH:MM:SS), AppsUsed (number of unique apps used in the record's interval), PackagesOpened (list of opened app package names in the record's interval).
+
+The report should be factual, objective, and based SOLELY on the provided raw data. Do NOT make a diagnosis or suggest the user has an addiction. Your task is to analyze and summarize the behavioral patterns observed in the data that are relevant to common criteria used in assessing potential smartphone addiction (Preoccupation, Tolerance, Craving/Withdrawal [behavioral indicators inferred from data], Loss of Control [behavioral indicators inferred from data], Neglect of other areas [behavioral indicators inferred from data]).
+
+Analyze the raw data to identify patterns related to:
+*   Total usage time and average daily/weekly duration (derived from ScreenSeconds and Timestamp).
+*   Frequency of interaction and checking behavior (derived from Unlocks and Timestamp).
+*   Intensity of engagement, particularly in scrolling activities (derived from ScrollPx, ScreenSeconds, and PackagesOpened).
+*   Timing of usage throughout the day and week (derived from Timestamp).
+*   Variability and trends in usage patterns over the data period (derived from analysis of all fields across the Timestamp range).
+*   Concentration of usage in specific apps or types of apps (derived from PackagesOpened and AppsUsed in relation to ScreenSeconds and ScrollPx).
+
+Structure the report as follows:
+
+**Smartphone Usage Behavior Summary**
+
+**User Identifier:** [Use placeholder if data is anonymous, or insert placeholder for ID]
+**Data Period:** [State the exact date range the provided data covers]
+
+**Summary of Usage Patterns Derived from Data:**
+Present the key findings and observed patterns, based on the analysis of the raw data points provided. Describe the *behaviors* the data reveals, linking them back to the analyzed data points (ScreenSeconds, Unlocks, ScrollPx, Timestamp patterns, etc.).
+
+*   **Overall Engagement and Volume:** Report aggregated ScreenSeconds data (e.g., total for period, average per day/week), noting overall usage duration.
+*   **Frequency of Interaction:** Report aggregated Unlocks data (e.g., total for period, average per day), noting how often the device is accessed.
+*   **Engagement Characteristics:** Describe patterns observed from ScreenSeconds, ScrollPx, and PackagesOpened analysis. Note significant scroll activity, common apps consuming time/scrolls, and patterns that might suggest rapid, brief interactions or prolonged immersion.
+*   **Timing and Consistency of Use:** Describe patterns from Timestamp analysis. Report peak usage times, prevalence of late-night or early-morning use, usage during typical work/study hours, and day-to-day variability in usage volume and timing.
+*   **Trends Over Period:** Describe any notable increases, decreases, or shifts in ScreenSeconds, Unlocks, ScrollPx, or usage timing throughout the specified Data Period.
+*   **App Focus:** Summarize which apps or app categories contribute most significantly to ScreenSeconds and ScrollPx, and briefly mention the variety indicated by AppsUsed.
+
+**Note on Data Source:** This report is based solely on the provided raw smartphone usage data records and does not include subjective self-report or clinical interview information.
+
+**Disclaimer:** This summary is provided for informational purposes only to present observed behavioral data. Diagnosis and clinical assessment are the sole responsibility of a qualified medical professional.
+
+[Insert User's Organized Raw Usage Data Below This Line]
