@@ -1,1 +1,50 @@
 # ai-server
+## Raw Data
+- ScreenSeconds: Screen time in seconds (int)
+- ScrollPx: Scroll amount in pixels (int)
+- Unlocks: Number of unlocks (int)
+- Timestamp: Timestamp string (YYYY-MM-DD HH:MM:SS)
+- AppsUsed: Number of unique apps used (int)
+- PackagesOpened: List of opened app package names (e.g. ["com.instagram.android", ...])
+
+## Feature Engineering
+### Rolling Time Features
+- screeen_last_15m: Sum of screen time over last 3 intervals (15 min)
+- screen_last_30m: Sum over 6 intervals (30 min)
+- screen_last_1h: Sum over 12 intervals (1 hour)
+- unlocks_last_15m: Sum of unlocks over last 3 intervals
+- unlocks_per_min: Unlocks per minute in current interval (Unlocks / 5)
+- scroll_rate: Pixels per second (ScrollPx / 300)
+### Cyclical Time Encoding
+- sin_hour, cos_hour: Hour of day encoded as sine/cosine
+- sin_minute, cos_minute: Minute encoded as sine/cosine
+```
+sin_x = sin(2π * x / max_value)
+sin_hour = sin(2π * x / 24)
+sin_min = sin(2π * x / 60)
+```
+### App Embedding
+- app_emb_0 to app_emb_31: 32-dimensional average embedding over all package names in PackagesOpened, using a pre-trained embedding dictionary (e.g. app_emb.json)
+### Example Input
+```
+{
+  "ScreenSeconds": [[120.0]],
+  "ScrollPx": [[3000.0]],
+  "Unlocks": [[2.0]],
+  "AppsUsed": [[5.0]],
+  "screen_last_15m": [[320.0]],
+  "screen_last_30m": [[850.0]],
+  "screen_last_1h": [[1600.0]],
+  "unlocks_per_min": [[0.4]],
+  "unlocks_last_15m": [[4.0]],
+  "scroll_rate": [[10.0]],
+  "sin_hour": [[0.5]],
+  "cos_hour": [[0.87]],
+  "sin_minute": [[0.0]],
+  "cos_minute": [[1.0]],
+  "app_emb_0": [[0.12]],
+  "app_emb_1": [[0.04]],
+  ...
+  "app_emb_31": [[0.07]]
+}
+```
