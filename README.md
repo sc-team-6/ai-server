@@ -74,3 +74,13 @@ fun averageEmbedding(packages: List<String>, appEmb: Map<String, List<Float>>, d
   "app_emb_31": [[0.07]]
 }
 ```
+## Prompts
+### Notification Prompt Example
+```
+Generate a short, gentle, non-patronizing, and creative notification sentence to alert a user about potential phone overuse, gently persuading them to stop, and suggesting alternative activities.
+Use the following information:
+Probability: [0.78]
+Current App: [com.youtube.android]
+Adjust the nuance slightly based on probability (higher means slightly more direct within the gentle tone). Use the app context if it helps make the suggestion more relevant (e.g., refer to scrolling, playing, etc.).
+Output ONLY the single notification sentence.
+```
